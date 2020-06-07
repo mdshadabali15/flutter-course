@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import './Question.dart';
 
@@ -9,36 +7,44 @@ class QuizApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
+    //throw UnimplementedError();
+
     return QuizAppState();
   }
 }
 
 class QuizAppState extends State<QuizApp> {
 
+  int questionIndex =0;
 
-  int questionIndex = 0;
-  void changeQuestion(){
+  var questionList = ['what\'s your pet name', 'what\'s your first school name'];
+
+
+  void changeQuestion()
+  {
+
     setState(() {
-      questionIndex = questionIndex+1;
+      questionIndex = questionIndex +1;
     });
   }
+
   void resetQuestion(){
     setState(() {
-      questionIndex = 0;
+      questionIndex =0;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    var questionList = ['what\'s your pet name', 'what\'s your first school name'];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome To Quiz App'),
+          title: Text('Welcome to Quiz App'),
         ),
         body: Column(
           children: <Widget>[
-            Question(questionList[questionIndex]), // This is custom widget defined in Question.dart
+            Question(questionList[questionIndex]),
             RaisedButton(
               child: Text('Change Question'),
               onPressed: changeQuestion,
@@ -46,7 +52,7 @@ class QuizAppState extends State<QuizApp> {
             RaisedButton(
               child: Text('Reset Question'),
               onPressed: resetQuestion,
-            )
+            ),
           ],
         ),
       ),
