@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.all(10.0),
       child: RaisedButton(
-        child: Text(buttonTex,style: TextStyle(color: Colors.red),),
+        child: Text(buttonTex.toUpperCase(),style: TextStyle(color: Colors.red),),
         onPressed: callBackFunction,
         color: Colors.blue,
       ),
