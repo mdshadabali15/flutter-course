@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../model/transaction.dart';
 import 'package:intl/intl.dart';
@@ -13,18 +14,23 @@ class TransactionList extends StatelessWidget {
     return Container(
         height: 300,
         child: userTransactionList.isEmpty
-            ? Column(
+            ? LayoutBuilder(builder: (context,constraint){
+
+              return Column(
                 children: <Widget>[
                   Text('No Transaction Yet !!!'),
                   SizedBox(
                     height: 20,
                   ),
                   Container(
-                    height: 200,
+                    height: constraint.maxHeight * 0.6,
                     child: Image.asset('assets/image/waiting.png'),
                   ),
                 ],
-              )
+              );
+
+
+        },)
             : ListView.builder(
                 itemBuilder: (context, index) {
                   return Card(
@@ -50,7 +56,17 @@ class TransactionList extends StatelessWidget {
                         DateFormat('dd-MM-yyyy')
                             .format(userTransactionList[index].transactionDate),
                       ),
-                      trailing: IconButton(
+                      trailing: MediaQuery.of(context).size.width> 460 ? FlatButton.icon(
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).errorColor,
+                          ),
+                           label: Text('Delete'),
+                        onPressed: (){
+                          deleteTransaction(userTransactionList[index].id);
+                        },
+
+                      ) : IconButton(
                         icon: Icon(
                           Icons.delete,
                           color: Theme.of(context).errorColor,
