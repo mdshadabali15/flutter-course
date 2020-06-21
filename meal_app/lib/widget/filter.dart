@@ -3,20 +3,19 @@ import 'package:meal_app/widget/meal_drawer.dart';
 
 class MealFilter extends StatefulWidget {
   static const MealFilter_ROUTE = '/mealFilter';
+
   @override
   _MealFilterState createState() => _MealFilterState();
 }
 
 class _MealFilterState extends State<MealFilter> {
-   var isGlutenFree = false;
+  var isGlutenFree = false;
+  var isVegan = false;
+  var isVegetarian = false;
+  var isLactoseFree = false;
 
-    var  isVegan = false;
-
-   var isVegetarian = false;
-
-   var isLactoseFree = false;
-
-  Widget switchListTileWidget(String title, String subtitle,bool currentValue, Function function) {
+  Widget switchListTileWidget(
+      String title, String subtitle, bool currentValue, Function function) {
     return SwitchListTile(
       title: Text(
         title,
@@ -28,7 +27,6 @@ class _MealFilterState extends State<MealFilter> {
       ),
       value: currentValue,
       onChanged: function,
-
     );
   }
 
@@ -37,6 +35,12 @@ class _MealFilterState extends State<MealFilter> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Filters'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: null,
+          ),
+        ],
       ),
       drawer: MealDrawer(),
       body: Container(
@@ -44,30 +48,37 @@ class _MealFilterState extends State<MealFilter> {
         //margin: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            Expanded( // Expanded is used when you allow widget to take as much space available
-              child: ListView( // ListView builder is not being used as list size is fixed.
+            Expanded(
+              // Expanded is used when you allow widget to take as much space available
+              child: ListView(
+                // ListView builder is not being used as list size is fixed.
                 children: <Widget>[
                   switchListTileWidget(
-                      'Gluten Free', 'Filter Gluten Free Meal',isGlutenFree,(newValue){
-                        setState(() {
-                          isGlutenFree = newValue;
-                        });
+                      'Gluten Free', 'Filter Gluten Free Meal', isGlutenFree,
+                      (newValue) {
+                    setState(() {
+                      isGlutenFree = newValue;
+                    });
                   }),
-                  switchListTileWidget('Vegan', ' Filter Vegan Meal',isVegan, (newValue){
+                  switchListTileWidget('Vegan', ' Filter Vegan Meal', isVegan,
+                      (newValue) {
                     setState(() {
                       isVegan = newValue;
                     });
                   }),
-                  switchListTileWidget('Vegetarian', ' Filter Vegetarian Meal',isVegetarian,(newValue){
+                  switchListTileWidget(
+                      'Vegetarian', ' Filter Vegetarian Meal', isVegetarian,
+                      (newValue) {
                     setState(() {
                       isVegetarian = newValue;
                     });
                   }),
                   switchListTileWidget(
-                      'Lactose Free', 'FilterLactose Free Meal',isLactoseFree,(newValue){
-                        setState(() {
-                          isLactoseFree = newValue;
-                        });
+                      'Lactose Free', 'FilterLactose Free Meal', isLactoseFree,
+                      (newValue) {
+                    setState(() {
+                      isLactoseFree = newValue;
+                    });
                   }),
                 ],
               ),
